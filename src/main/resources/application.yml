@@ -33,7 +33,10 @@ logging:
 app:
   service:
     kakao:
-      api-key: 56c46ee50c319532725d033c06dbf938 # ?? ?
+      api-key: KakaoAK 56c46ee50c319532725d033c06dbf938
+      base-url: https://dapi.kakao.com
+
     naver:
-      api-key: FCJb1B16iTmBY55OtBiV # ?? ?
-      secret: mBJQwiNKs0 # ?? secret
+      api-key: FCJb1B16iTmBY55OtBiV
+      secret: mBJQwiNKs0
+      base-url: https://openapi.naver.com
