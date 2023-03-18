@@ -1,16 +1,15 @@
 package com.koon.blogsearchservice.api.dto.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.koon.blogsearchservice.api.dto.naver.BlogItemDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BlogDocument {
+public class BlogDocumentDTO {
     @JsonProperty("blogname")
     private String blogname;
 
@@ -18,7 +17,7 @@ public class BlogDocument {
     private String contents;
 
     @JsonProperty("datetime")
-    private LocalDateTime datetime;
+    private String datetime;
 
     @JsonProperty("thumbnail")
     private String thumbnail;
@@ -28,4 +27,11 @@ public class BlogDocument {
 
     @JsonProperty("url")
     private String url;
+
+    public BlogDocumentDTO(BlogItemDTO item) {
+        this.blogname = item.getBloggername();
+        this.contents = item.getDescription();
+        this.datetime = item.getPostdate();
+        this.title = item.getTitle();
+    }
 }
