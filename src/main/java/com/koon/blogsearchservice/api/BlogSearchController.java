@@ -28,7 +28,7 @@ public class BlogSearchController {
         PageRequest pageable = PageRequest.of(searchDTO.getPage(), searchDTO.getSize());
 
         try {
-            KakaoDTO kakaoDTO = blogSearchService.blogSearch(searchDTO, pageable);
+            KakaoDTO kakaoDTO = blogSearchService.kakaoBlogSearch(searchDTO, pageable);
             searchResponse = new SearchResponse(kakaoDTO, pageable);
         } catch (RuntimeException e) {
             NaverDTO naverDTO = blogSearchService.naverBlogSearch(searchDTO, pageable);
