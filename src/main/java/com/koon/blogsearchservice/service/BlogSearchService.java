@@ -7,6 +7,7 @@ import com.koon.blogsearchservice.client.KakaoOpenApiClient;
 import com.koon.blogsearchservice.client.NaverOpenApiClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,22 @@ public class BlogSearchService {
     private final NaverOpenApiClient naverClient;
 
     public KakaoDTO kakaoBlogSearch(SearchDTO searchDTO, Pageable pageable) {
-        return kakaoClient.getSearchBlog(searchDTO, pageable);
+        // 카카오 Open API 조회
+        KakaoDTO kakaoDTO = kakaoClient.getSearchBlog(searchDTO, pageable);
+
+        // 검색어 저장을 위한 이벤트 발생
+
+
+        return kakaoDTO;
     }
 
     public NaverDTO naverBlogSearch(SearchDTO searchDTO, Pageable pageable) {
-        return naverClient.getSearchBlog(searchDTO, pageable);
+        // 네이버 Open API 조회
+        NaverDTO naverDTO = naverClient.getSearchBlog(searchDTO, pageable);
+
+        // 검색어 저장을 위한 이벤트 발생
+
+
+        return naverDTO;
     }
 }
