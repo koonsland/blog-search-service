@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,7 +17,7 @@ public class BlogSearchService {
     private final KakaoOpenApiClient kakaoClient;
     private final NaverOpenApiClient naverClient;
 
-    public KakaoDTO blogSearch(SearchDTO searchDTO, Pageable pageable) {
+    public KakaoDTO kakaoBlogSearch(SearchDTO searchDTO, Pageable pageable) {
         return kakaoClient.getSearchBlog(searchDTO, pageable);
     }
 

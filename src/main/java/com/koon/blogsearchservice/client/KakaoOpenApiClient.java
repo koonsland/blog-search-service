@@ -2,11 +2,10 @@ package com.koon.blogsearchservice.client;
 
 import com.koon.blogsearchservice.api.dto.SearchDTO;
 import com.koon.blogsearchservice.api.dto.kakao.KakaoDTO;
+import com.koon.blogsearchservice.config.KakaoConfig;
 import com.koon.blogsearchservice.config.WebClientConfig;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,10 +15,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequiredArgsConstructor
 public class KakaoOpenApiClient implements OpenApiClient {
     private final WebClientConfig webClientConfig;
+    private final KakaoConfig kakaoConfig;
 
     @Override
     public KakaoDTO getSearchBlog(SearchDTO searchDTO, Pageable pageable) {
-        WebClient webClient = webClientConfig.kakaoWebClient();
+        WebClient webClient = webClientConfig.webClient(kakaoConfig);
 
         return webClient
                 .get()
