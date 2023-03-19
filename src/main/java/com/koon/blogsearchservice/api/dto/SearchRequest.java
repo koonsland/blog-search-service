@@ -1,12 +1,13 @@
 package com.koon.blogsearchservice.api.dto;
 
+import com.koon.blogsearchservice.domain.dto.SearchDTO;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class SearchDTO {
+public class SearchRequest {
     @NotBlank
     private String query;
 
@@ -19,4 +20,8 @@ public class SearchDTO {
     private int size = 10;
 
     private String sort;
+
+    public SearchDTO toServiceDTO() {
+        return new SearchDTO(query, page, size, sort);
+    }
 }
