@@ -18,6 +18,6 @@ public class PopularEventHandler {
     @EventListener
     public void onApplicationEvent(PopularEvent event) throws InterruptedException{
         log.info("[검색어 이벤트 핸들러] 검색어: {}", event.getName());
-        popularService.plusPopularNameCount(event.getName());
+        popularService.plusPopularSearchWordCount(event.getName());
     }
 }

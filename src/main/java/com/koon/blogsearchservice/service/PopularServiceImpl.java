@@ -28,29 +28,34 @@ public class PopularServiceImpl implements PopularService {
 
     @Override
     @Transactional
-    public Long plusPopularNameCount(String name) {
+    public Long plusPopularSearchWordCount(String searchWord) {
         // 화이트 스페이스 제거
-        String popularStr = trimString(name);
+        String popularSearchWord = trimString(searchWord);
 
         // 기존 검색어 조회
-        Popular findPopular = popularRepository.findByName(popularStr);
+        Popular findPopular = popularRepository.findByName(popularSearchWord);
         if (findPopular != null) {
             findPopular.plusCount();
             return findPopular.getId();
         }
 
         // 저장
-        Popular popular = Popular.createPopular(popularStr);
-        try {
-            popularRepository.save(popular);
-        } catch (RuntimeException e) {
-            applicationEventPublisher.publishEvent(new PopularEvent(popularStr));
-            throw new RuntimeException("저장 중 충돌. 중복 문제로 이벤트 재발생");
-        }
-        return popular.getId();
+        Long popularId = savePopularSearchWord(searchWord);
+        return popularId;
     }
 
     private String trimString(String name) {
         return name.trim();
+    }
+
+    private Long savePopularSearchWord(String searchWord) {
+        Popular popular = Popular.createPopular(searchWord);
+        try {
+            popularRepository.save(popular);
+        } catch (RuntimeException e) {
+            applicationEventPublisher.publishEvent(new PopularEvent(searchWord));
+            throw new RuntimeException("저장 중 충돌. 중복 문제로 이벤트 재발생");
+        }
+        return popular.getId();
     }
 }

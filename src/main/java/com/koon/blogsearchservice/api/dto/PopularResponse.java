@@ -13,7 +13,7 @@ public class PopularResponse {
     private long count;
 
     public PopularResponse(Popular popular) {
-        this.name = popular.getName();
+        this.name = popular.getSearchWord();
         this.count = popular.getCount();
     }
 }

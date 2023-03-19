@@ -18,20 +18,20 @@ public class Popular {
     @Column(name = "popular_id")
     private Long id;
 
-    @Column(name = "name", length = 255, nullable = false, unique = true)
-    private String name;
+    @Column(name = "search_word", length = 255, nullable = false, unique = true)
+    private String searchWord;
 
     @Column(name = "count", nullable = false)
     private long count;
 
-    private Popular(String name) {
-        this.name = name;
+    private Popular(String searchWord) {
+        this.searchWord = searchWord;
         this.count = 1;
     }
 
     // 생성 메서드
-    public static Popular createPopular(String name) {
-        return new Popular(name);
+    public static Popular createPopular(String searchWord) {
+        return new Popular(searchWord);
     }
 
     // 비지니스 메서드

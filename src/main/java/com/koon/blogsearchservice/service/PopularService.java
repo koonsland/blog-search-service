@@ -7,5 +7,5 @@ import java.util.List;
 public interface PopularService {
     List<Popular> getTop10Populars();
 
-    Long plusPopularNameCount(String name);
+    Long plusPopularSearchWordCount(String name);
 }

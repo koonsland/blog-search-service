@@ -44,7 +44,7 @@ class PopularServiceImplTest {
         for (int i = 0; i < numberOfExcute; i++) {
             service.execute(() -> {
                 try {
-                    popularService.plusPopularNameCount(name);
+                    popularService.plusPopularSearchWordCount(name);
                     successCount.getAndIncrement();
                     log.info("성공");
                 } catch (Exception e) {
