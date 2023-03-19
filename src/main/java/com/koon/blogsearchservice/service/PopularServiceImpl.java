@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Slf4j
@@ -33,7 +32,7 @@ public class PopularServiceImpl implements PopularService {
         String popularSearchWord = trimString(searchWord);
 
         // 기존 검색어 조회
-        Popular findPopular = popularRepository.findByName(popularSearchWord);
+        Popular findPopular = popularRepository.findBySearchWord(popularSearchWord);
         if (findPopular != null) {
             findPopular.plusCount();
             return findPopular.getId();

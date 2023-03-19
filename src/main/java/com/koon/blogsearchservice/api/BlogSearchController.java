@@ -1,6 +1,6 @@
 package com.koon.blogsearchservice.api;
 
-import com.koon.blogsearchservice.api.dto.SearchDTO;
+import com.koon.blogsearchservice.api.dto.SearchRequest;
 import com.koon.blogsearchservice.api.dto.SearchResponse;
 import com.koon.blogsearchservice.api.dto.kakao.KakaoDTO;
 import com.koon.blogsearchservice.api.dto.naver.NaverDTO;
@@ -23,15 +23,15 @@ public class BlogSearchController {
     private final BlogSearchService blogSearchService;
 
     @GetMapping
-    public ResponseEntity<SearchResponse> blogSearch(SearchDTO searchDTO) {
+    public ResponseEntity<SearchResponse> blogSearch(SearchRequest request) {
         SearchResponse searchResponse;
-        PageRequest pageable = PageRequest.of(searchDTO.getPage(), searchDTO.getSize());
+        PageRequest pageable = PageRequest.of(request.getPage(), request.getSize());
 
         try {
-            KakaoDTO kakaoDTO = blogSearchService.kakaoBlogSearch(searchDTO, pageable);
+            KakaoDTO kakaoDTO = blogSearchService.kakaoBlogSearch(request.toServiceDTO(), pageable);
             searchResponse = new SearchResponse(kakaoDTO, pageable);
         } catch (RuntimeException e) {
-            NaverDTO naverDTO = blogSearchService.naverBlogSearch(searchDTO, pageable);
+            NaverDTO naverDTO = blogSearchService.naverBlogSearch(request.toServiceDTO(), pageable);
             searchResponse = new SearchResponse(naverDTO, pageable);
         }
 

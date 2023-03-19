@@ -1,10 +1,10 @@
 package com.koon.blogsearchservice.service;
 
-import com.koon.blogsearchservice.api.dto.SearchDTO;
 import com.koon.blogsearchservice.api.dto.kakao.KakaoDTO;
 import com.koon.blogsearchservice.api.dto.naver.NaverDTO;
 import com.koon.blogsearchservice.client.KakaoOpenApiClient;
 import com.koon.blogsearchservice.client.NaverOpenApiClient;
+import com.koon.blogsearchservice.domain.dto.SearchDTO;
 import com.koon.blogsearchservice.domain.event.PopularEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -55,7 +55,7 @@ class PopularServiceImplTest {
         }
         latch.await();
 
-        Popular findPopular = popularRepository.findByName(name);
+        Popular findPopular = popularRepository.findBySearchWord(name);
 
         // then
         assertEquals(findPopular.getCount(), numberOfExcute);
