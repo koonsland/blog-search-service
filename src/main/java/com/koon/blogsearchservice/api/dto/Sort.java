@@ -22,4 +22,11 @@ public enum Sort {
                 .findFirst()
                 .orElse(ACCURACY);
     }
+
+    public static String getNaverName(Sort shortName) {
+        if (shortName == RECENCY)
+            return "date";
+        else
+            return "sim";
+    }
 }

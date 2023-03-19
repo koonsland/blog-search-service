@@ -2,8 +2,9 @@ package com.koon.blogsearchservice.client;
 
 import com.koon.blogsearchservice.api.dto.SearchRequest;
 import com.koon.blogsearchservice.domain.dto.SearchDTO;
+import com.koon.blogsearchservice.domain.dto.WebClientResponseDTO;
 import org.springframework.data.domain.Pageable;
 
-public interface OpenApiClient<T> {
-    T getSearchBlog(SearchDTO searchDTO, Pageable pageable);
+public interface OpenApiClient {
+    WebClientResponseDTO getSearchBlog(SearchDTO searchDTO);
 }
