@@ -1,16 +1,25 @@
 package com.koon.blogsearchservice.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koon.blogsearchservice.api.dto.kakao.KakaoDTO;
 import com.koon.blogsearchservice.config.KakaoConfig;
 import com.koon.blogsearchservice.config.WebClientConfig;
 import com.koon.blogsearchservice.domain.dto.SearchDTO;
+import com.koon.blogsearchservice.domain.dto.WebClientError;
 import com.koon.blogsearchservice.domain.dto.WebClientResponseDTO;
+import com.koon.blogsearchservice.exception.ErrorResponse;
+import com.koon.blogsearchservice.exception.KakaoServerException;
+import com.koon.blogsearchservice.exception.NaverServerException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
@@ -42,6 +51,20 @@ public class KakaoOpenApiClient implements OpenApiClient {
                         .build()
                 )
                 .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, response ->
+                        response.bodyToMono(String.class).flatMap(body -> {
+                            try {
+                                log.error("{}", body);
+                                WebClientError webClientError = new ObjectMapper().readValue(body, WebClientError.class);
+                                return Mono.error(new KakaoServerException(webClientError.getMessage()));
+                            } catch (JsonProcessingException e) {
+                                return Mono.error(new RuntimeException());
+                            }
+                        })
+                )
+                .onStatus(HttpStatusCode::is5xxServerError, response ->
+                        Mono.error(new RuntimeException())
+                )
                 .bodyToMono(KakaoDTO.class)
                 .block();
     }

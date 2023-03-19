@@ -5,6 +5,7 @@ import com.koon.blogsearchservice.api.dto.SearchResponse;
 import com.koon.blogsearchservice.api.dto.kakao.KakaoDTO;
 import com.koon.blogsearchservice.api.dto.naver.NaverDTO;
 import com.koon.blogsearchservice.domain.dto.WebClientResponseDTO;
+import com.koon.blogsearchservice.exception.KakaoServerException;
 import com.koon.blogsearchservice.service.KakaoBlogSearchService;
 import com.koon.blogsearchservice.service.NaverBlogSearchService;
 import jakarta.validation.Valid;
@@ -31,7 +32,8 @@ public class BlogSearchController {
 
         try {
             searchResponse = new SearchResponse(kakaoBlogSearchService.blogSearch(request.toServiceDTO()));
-            throw new RuntimeException();
+        } catch (KakaoServerException e) {
+            throw new KakaoServerException(e.getMessage());
         } catch (RuntimeException e) {
             searchResponse = new SearchResponse(naverBlogSearchService.blogSearch(request.toServiceDTO()));
         }

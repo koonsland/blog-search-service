@@ -24,6 +24,37 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(value = {KakaoServerException.class})
+    public ResponseEntity kakaoServerExceptionHandler(KakaoServerException e) {
+        log.info("{}", e.getMessage());
+        return new ResponseEntity(
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        HttpStatus.BAD_REQUEST.name(),
+                        null,
+                        e.getMessage()
+                ),
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(value = {NaverServerException.class})
+    public ResponseEntity namverServerExceptionHandler(NaverServerException e) {
+        log.info("{}", e.getMessage());
+        return new ResponseEntity(
+                new ErrorResponse(
+                        HttpStatus.BAD_REQUEST.value(),
+                        HttpStatus.BAD_REQUEST.name(),
+                        e.getNaverErrorResponse().getErrorCode(),
+                        e.getNaverErrorResponse().getErrorMessage()
+                ),
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+
     private ErrorResponse commonErrorResponse(ErrorCode errorCode, HttpStatus httpStatus) {
         return new ErrorResponse(
                 httpStatus.value(),

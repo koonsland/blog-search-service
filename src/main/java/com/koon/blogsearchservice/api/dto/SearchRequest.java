@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class SearchRequest {
-    @NotBlank
+//    @NotBlank
     private String query;
 
     @Min(1)
