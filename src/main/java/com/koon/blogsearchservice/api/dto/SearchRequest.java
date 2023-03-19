@@ -1,5 +1,6 @@
 package com.koon.blogsearchservice.api.dto;
 
+import com.koon.blogsearchservice.domain.dto.NaverSearchDTO;
 import com.koon.blogsearchservice.domain.dto.SearchDTO;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
