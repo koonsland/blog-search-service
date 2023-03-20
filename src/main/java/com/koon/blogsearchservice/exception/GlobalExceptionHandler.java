@@ -31,8 +31,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new ErrorResponse(
                         HttpStatus.BAD_REQUEST.value(),
                         HttpStatus.BAD_REQUEST.name(),
-                        null,
-                        e.getMessage()
+                        e.getKakaoErrorResponse().getErrorType(),
+                        e.getKakaoErrorResponse().getMessage()
                 ),
                 new HttpHeaders(),
                 HttpStatus.BAD_REQUEST

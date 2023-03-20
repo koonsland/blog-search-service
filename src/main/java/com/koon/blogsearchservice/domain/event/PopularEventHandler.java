@@ -1,6 +1,6 @@
 package com.koon.blogsearchservice.domain.event;
 
-import com.koon.blogsearchservice.service.PopularService;
+import com.koon.blogsearchservice.domain.service.PopularService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

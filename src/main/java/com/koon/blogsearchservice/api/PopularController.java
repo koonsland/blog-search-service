@@ -1,8 +1,9 @@
 package com.koon.blogsearchservice.api;
 
+import com.koon.blogsearchservice.api.dto.PopularDTO;
 import com.koon.blogsearchservice.api.dto.PopularResponse;
 import com.koon.blogsearchservice.domain.model.Popular;
-import com.koon.blogsearchservice.service.PopularService;
+import com.koon.blogsearchservice.domain.service.PopularService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,13 @@ public class PopularController {
     private final PopularService popularService;
 
     @GetMapping
-    public ResponseEntity<List<PopularResponse>> getPopulars() {
+    public ResponseEntity<PopularResponse> getPopulars() {
         List<Popular> populars = popularService.getTop10Populars();
-        List<PopularResponse> response = populars
+        List<PopularDTO> response = populars
                 .stream()
-                .map(popular -> new PopularResponse(popular))
+                .map(popular -> new PopularDTO(popular))
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new PopularResponse(response));
     }
 }

@@ -2,6 +2,7 @@ package com.koon.blogsearchservice.service;
 
 import com.koon.blogsearchservice.domain.model.Popular;
 import com.koon.blogsearchservice.domain.repository.PopularRepository;
+import com.koon.blogsearchservice.domain.service.PopularService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

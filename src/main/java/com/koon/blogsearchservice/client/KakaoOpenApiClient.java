@@ -9,6 +9,7 @@ import com.koon.blogsearchservice.domain.dto.SearchDTO;
 import com.koon.blogsearchservice.domain.dto.WebClientError;
 import com.koon.blogsearchservice.domain.dto.WebClientResponseDTO;
 import com.koon.blogsearchservice.exception.ErrorResponse;
+import com.koon.blogsearchservice.exception.KakaoErrorResponse;
 import com.koon.blogsearchservice.exception.KakaoServerException;
 import com.koon.blogsearchservice.exception.NaverServerException;
 import lombok.RequiredArgsConstructor;
@@ -55,8 +56,8 @@ public class KakaoOpenApiClient implements OpenApiClient {
                         response.bodyToMono(String.class).flatMap(body -> {
                             try {
                                 log.error("{}", body);
-                                WebClientError webClientError = new ObjectMapper().readValue(body, WebClientError.class);
-                                return Mono.error(new KakaoServerException(webClientError.getMessage()));
+                                KakaoErrorResponse kakaoErrorResponse = new ObjectMapper().readValue(body, KakaoErrorResponse.class);
+                                return Mono.error(new KakaoServerException(kakaoErrorResponse));
                             } catch (JsonProcessingException e) {
                                 return Mono.error(new RuntimeException());
                             }
