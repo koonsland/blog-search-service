@@ -11,6 +11,10 @@ API 는 2가지 입니다.
 - Framework: `Spring boot 3.0.4`
 - Database: `H2 (in memory)`
 
+## 다운로드
+
+- [Jar 파일 다운로드](https://github.com/koonsland/blog-search-service/blob/develop/jar/BlogSearchService-1.0.0-SNAPSHOT.jar)
+
 ## 실행 방법
 
 ---
