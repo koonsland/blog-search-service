@@ -22,7 +22,7 @@ public class BlogSearchController {
     private final KakaoBlogSearchService kakaoBlogSearchService;
     private final NaverBlogSearchService naverBlogSearchService;
 
-    @GetMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @GetMapping
     public ResponseEntity<SearchResponse> blogSearch(SearchRequest request) {
         SearchResponse searchResponse;
 

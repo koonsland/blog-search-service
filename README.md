@@ -57,6 +57,33 @@ $ java -jar BlogSearchService-1.0.0-SNAPSHOT.jar
 |thumbnail|String|이미지 URL|
 |datetime|Datetime|블로그 글 작성시간|
 
+### Sample
+
+#### Request
+```shell
+curl -v -G localhost:8080/search --data-urlencode "query=카카오"
+```
+
+#### Response
+```shell
+HTTP/1.1 200
+Content-Type: application/json
+{
+  "documents":[
+    {
+      "blogname":"본능의",
+      "contents":"아이위랩...",
+      "datetime":"2017-11-06T15:02:00",
+      "thumbnail":"https://xxx",
+      "title":"<b>카카오</b>",
+      "url":"http://xxx"
+    }
+  ],
+  "page":1,
+  "size":10,
+  "totalCount":17283358
+}
+```
 ---
 
 ### `GET` /populars  
