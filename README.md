@@ -110,7 +110,7 @@ Content-Type: application/json
 
 #### Request
 ```shell
- curl -v -X GET "localhost:8080/populars"    
+ curl -v -G "localhost:8080/populars"    
 ```
 
 #### Response
